@@ -1,0 +1,150 @@
+import { initializeApp } from "firebase/app";
+import {getAuth} from 'firebase/auth'
+import {getFirestore} from 'firebase/firestore'
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCmn8p5tOsCM7jHB-F78AyFMNBDjJXFn3c",
+  authDomain: "social-network-c771a.firebaseapp.com",
+  projectId: "social-network-c771a",
+  storageBucket: "social-network-c771a.appspot.com",
+  messagingSenderId: "651475470950",
+  appId: "1:651475470950:web:6b24050baa40d630db3ba7",
+  measurementId: "G-YMK6X5ZCQX"
+};
+
+const app = initializeApp(firebaseConfig);
+
+export const db = getFirestore(app)
+
+// 0. Авторизация
+export const auth = getAuth(app) // getAuth - устанавливает аутентификацию в проекте
+// auth - получение информации о пользователе который вошел
+// auth.currentUser
+
+
+// 1. signIn
+
+import {createUserWithEmailAndPassword} from 'firebase/auth' // метод аутентификации
+
+const signIn = async()=>{
+  try {
+    const response = await createUserWithEmailAndPassword(auth,email,pass)  // валидность отдает!
+  } catch (error) { // : any
+    console.log(error)
+    const message = error['code']  // firebase не дает мне посмотреть что в объекте или я не могу
+    setMessageError(message)
+}}
+
+
+// 2. signOut
+import {signOut} from 'firebase/auth'
+
+const logout = async() => {
+  try{
+    const response = await signOut(auth) 
+  }catch(error){ // : any
+    const message = error['code'] // firebase не дает мне посмотреть что в объекте или я не могу
+    setMessageError(message)
+  }
+}
+
+
+// 3. work with db and collection
+
+// Ссылка на ТАБЛИЦЫ (коллекию)
+
+const usersCollectionRef = collection(db,'users') // БД, из какой ТАБЛИЦЫ (коллекции)        // Лучше сделать ОБЪЕКТ отдельный сыллками на таблицы
+
+const getDocUserRef =id=>{
+  const docRef = doc(db, "users", id);
+  return docRef
+}
+
+// 4. CRUD Сначала в firebase : allow read, write: if true;
+
+import {collection,getDocs,getDoc,addDoc,updateDoc,deleteDoc,doc} from 'firebase/firestore' // collection - ТАБЛИЦЫ
+import {db} from './config/firebase-config'
+
+  const [users,setusers] = useState([])
+  const [user,setuser] = useState({fname:"fname",sname:"sname"})
+  const [chat,setchat] = useState({})
+  const [message,setmessage] = useState({})
+
+  const getUsers = async() => {
+    // try catch
+    const data = await getDocs(usersCollectionRef)
+    const UsersResponse = data.docs.map(doc=>({...doc.data(),id:doc.id}))  // () - вместо return
+    setusers(UsersResponse)
+    console.log("Users: ", UsersResponse)
+}
+  
+  const getUser = async() => {
+    // try catch
+    const id = users[0]["id"]
+    const userDocRef = getDocUserRef(id) // await ?
+    const data = await getDoc(userDocRef)
+    let UserResponse = data.data()
+    setuser(UserResponse)
+    console.log("User: ", UserResponse)  
+  } 
+  
+  const addUser = async() => {
+    // try catch
+    const newUser = {fname:"new_fname",sname:"new_sname"}       // не нужные поля вручную = null
+    const newUserResponse = await addDoc(usersCollectionRef,newUser)
+    console.log("newUser: ", newUserResponse.id)
+  }
+  
+  const updUser = async() => {
+  // try catch
+    const id = users[0]["id"]
+    console.log('id: ', id)
+    const userDocRef = getDocUserRef(id)
+    const updUser = {fname:"upd_fname",sname:"upd_sname"}
+    const updUserResponse = await updateDoc(userDocRef,updUser) 
+    console.log("updUserResponse ",updUserResponse)
+  }
+  
+  const delUser = async() => {      
+  // try catch
+    const id = users[0]["id"]
+    console.log('del id: ', id)
+    const userDocRef = getDocUserRef(id)
+    const delUserResponse = await deleteDoc(userDocRef).then(res=>{
+      console.log("res",res)
+    }
+      
+    )                   // Прежде чем удалить нужно сначала получить сущность, но тут это doc
+    console.log("delUserResponse ",delUserResponse)
+  }
+  const getUsersButton = async()=>{
+    await getUsers()
+  }
+  const getUserButton = async()=>{
+    await getUser()
+  }
+  const addUserButton = async()=>{
+    await addUser()
+  }
+  const updUserButton = async()=>{
+    await updUser()
+  }
+  const delUserButton = async()=>{
+    await delUser()
+  }
+
+
+// 5. Работа с Storage Картинки и Файлы
+
+import {getStorage,ref,uploadBytes} from "firebase/storage"
+export const storage = getStorage(app)
+
+
+const file = e.target.files[0]
+
+const filesFolderRef = ref(storage,`ProjectFiles/${file.name}`) // путь
+
+// try catch
+await uploadBytes(filesFolderRef,file) // отправка файла
+
+// как правильно получать и загружать файл? он дал ссылку надо искать https://www.youtube.com/playlist?list=PLpPqplz6dKxUfvM22GXRvYA4s-mvJE0XF

@@ -1,0 +1,133 @@
+.Post
+    // background-color: #222
+    .Header
+        display: flex
+        justify-content: space-between
+        align-items: center
+        margin-bottom: 15px
+        .authorWrap
+            display: flex
+            align-items: center
+            .avatar
+                width: 40px
+                height: 40px
+                margin-right: 15px
+                cursor: pointer
+                img
+                    width: 40px
+                    height: 40px
+            .author
+                display: block
+                align-items: center
+                a
+                    color: #6faaeb
+                    text-decoration: none
+                    font-size: 14px
+                    margin-bottom: 10px
+                    &:hover
+                        text-decoration: underline
+                p
+                    color: #939393
+                    font-size: 13px
+                    cursor: pointer
+                    &:hover
+                        text-decoration: underline
+
+
+        .editPost
+            width: 24px
+            height: 24px
+            div
+                position: relative
+                cursor: pointer
+                // .hide
+                //     display: none
+                .menu
+                    position: absolute
+                    padding: 10px 0px
+                    color: #fff
+                    background-color: #2c2d2e
+                    top: 30px
+                    left: -180px
+                    border-radius: 10px
+                    font-size: 14px
+                    white-space: nowrap
+                    &.hide
+                        display: none
+                    ul
+                        li
+                            list-style-type: none
+                            padding: 10px
+                            &:hover
+                                background-color: #393939  
+                            
+                img
+                    height: 24px
+                    width: 24px
+    .content
+        margin-bottom: 10px
+        p
+            color: #fff
+            margin-bottom: 10px
+        .img
+            max-height: 100%
+            max-width: 100%
+            display: flex
+            justify-content: center
+            align-items: center
+            border-radius: 10px
+            background-color: #333333
+            img
+                max-height: 100%
+                max-width: 100%
+    .feedback
+        display: flex
+        align-items: center
+        justify-content: space-between
+        font-size: 14px
+        .lkr
+            display: flex
+            align-items: center
+            div
+                margin-right: 10px
+                button
+                    display: flex   
+                    justify-content: center
+                    align-items: center
+                    padding: 5px 10px
+                    .love
+                        width: 20px
+                        height: 20px
+                        img
+                            width: 20px
+                            height: 20px
+                    .comment
+                        width: 20px
+                        height: 20px
+                        img
+                            width: 20px
+                            height: 20px
+                        
+                    .share
+                        width: 20px
+                        height: 20px
+                        img
+                            width: 20px
+                            height: 20px
+                
+        .views
+            display: flex
+            align-items: center
+            justify-content: center
+            p
+                color: #939393
+            .view
+                width: 20px
+                height: 20px
+                display: flex
+                align-items: center
+                justify-content: center
+                margin-right: 10px
+                img
+                    width: 20px
+                    height: 20px

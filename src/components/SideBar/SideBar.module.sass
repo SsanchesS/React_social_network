@@ -1,0 +1,28 @@
+.sideBar
+    background-color: #141414
+    margin-right: 10px
+    width: 14%
+    ul
+        li
+            padding: 10px 20px 10px 50px
+            position: relative
+            list-style-type: none
+            cursor: pointer
+            font-size: 14px
+            border-radius: 5px
+            &.active
+                background-color: #393939
+            &::before
+                width: 30px
+                height: 30px
+                content: ''
+                position: absolute
+                top: 10%
+                left: 5%
+                background: url('../../../public/img/menu.png') center center no-repeat
+                background-size: cover
+            &:hover
+                background-color: #393939
+            a
+                text-decoration: none
+                color: white

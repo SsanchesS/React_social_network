@@ -1,0 +1,75 @@
+$mr : 15px
+$widthHeightIcons: 30px
+.header
+    width: 100%
+    height: 100%
+    background-color: #222222
+    color: #fff
+    padding: 10px 0px
+    margin-bottom: 10px
+    .center
+        width: 70%
+        height: 100%
+        margin: 0 auto
+    .headerWrap
+        margin: 0 auto
+        width: 100%
+        height: 100%
+        display: flex
+        justify-content: space-between
+        align-items: center
+        .left 
+            display: flex
+            align-items: center
+            .logo
+                width: 35px
+                height: 35px
+                margin-right: $mr
+                img
+                    width: 35px
+                    height: 35px
+            .title
+                margin-right: 70px
+            .search
+                position: relative
+                margin-right: $mr
+                input
+                    padding: 10px 10px 10px 50px
+                    border-radius: 15px
+                    border: none
+                    outline: none
+                    background-color: #424242
+                    color: #8e8e8e
+                &::before
+                    content: ''
+                    top: 20%
+                    left: 5%
+                    width: 20px
+                    height: 20px
+                    position: absolute
+                    background: url("../../../public/img/search.png") no-repeat center center
+                    background-size: cover
+            .notification
+                width: $widthHeightIcons
+                height: $widthHeightIcons
+                margin-right: $mr
+                img
+                    width: $widthHeightIcons
+                    height: $widthHeightIcons
+            .music
+                width: $widthHeightIcons
+                height: $widthHeightIcons
+                img
+                    width: $widthHeightIcons
+                    height: $widthHeightIcons
+        .right
+            display: flex
+            align-items: center
+            .userName
+                margin-right: $mr
+            .avatar
+                width: $widthHeightIcons
+                height: $widthHeightIcons
+                img
+                    width: $widthHeightIcons
+                    height: $widthHeightIcons
