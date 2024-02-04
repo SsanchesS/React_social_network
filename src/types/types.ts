@@ -11,7 +11,7 @@ export interface IUser{
     // birth : Date // date(1990, 1, 1),
     avatar: string
 
-    password: string
+    password: string  // не обязательно?
     email: string
     
     mas_friends: Array<number>
@@ -19,8 +19,8 @@ export interface IUser{
 }
 export interface IChat{
     id:number
-    mas_users: Array<number> 
-    mas_messages: Array<number> 
+    mas_users: Array<number>  ///////////////////////
+    mas_messages: Array<number>  ///////////////////////
 }
 //
 export interface Iresponse{
