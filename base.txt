@@ -17,5 +17,6 @@ users
  - mas_id_friends (id user)
  - mas_id_chats (FOREIGN chat)
 
+*Не является подлинной*
 comment:
 Да, можно расширить friends, добавить notifications и сделать прочие улучшения, но это все же пет проект и проектировать БД одному тяжко

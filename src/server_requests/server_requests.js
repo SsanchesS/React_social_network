@@ -1,4 +1,5 @@
 import axios from "axios"
+// import JSON
 
 const serverUrl  = "http://127.0.0.1:8000"
 
@@ -15,7 +16,12 @@ export const auth = async (data) =>{
 // export const registration = async (data:IUser):Promise<Iresponse> =>{
 export const registration = async (data) =>{
     try{
-        const response = await axios.post(`${serverUrl}/registration/`,data)
+        const formData = new FormData()
+        for (const item in data){
+            formData.append(`${item}`,data[item])
+        }
+        console.log(formData)
+        const response = await axios.post(`${serverUrl}/registration/`,formData)
         const responseData = response.data
         return responseData
     }catch(error){

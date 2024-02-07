@@ -4,7 +4,7 @@ import s from './Friend.module.sass'
 const Friend = () => {
   return (
     <div className={s.Friend}>
-        <div className={s.img}><img src="./img/avatar.png" alt="avatar" /></div>      {/* user content proops */}
+        <div className={s.img}><img src="/img/avatar.png" alt="avatar" /></div>      {/* user content proops */}
         <div className={s.desc}>
             <div className={s.text}>
                 <h1>Валерий Марочнов</h1>

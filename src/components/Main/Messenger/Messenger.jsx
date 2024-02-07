@@ -6,7 +6,7 @@ const Messenger = () => {
   return (
     <div className={`${s.Messenger} card`}>
         <div className={s.search}>
-            <div className={s.img}><img src="./img/search.png" alt="search" /></div>
+            <div className={s.img}><img src="/img/search.png" alt="search" /></div>
             <input type="text" placeholder='Поиск'/>
         </div>
 

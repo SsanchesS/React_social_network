@@ -4,7 +4,7 @@ import s from './Dialog.module.sass'
 const Dialog = () => {
   return (
     <div className={s.Dialog}>
-        <div className={s.img}><img src="./img/avatar.png" alt="avatar" /></div>        {/* user content proops*/}
+        <div className={s.img}><img src="/img/avatar.png" alt="avatar" /></div>        {/* user content proops*/}
         <div className={s.desc}>
             <div className={s.text}>
                 <div><a href='#'>Валерий Марочнов</a></div>
