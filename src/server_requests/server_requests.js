@@ -20,11 +20,15 @@ export const registration = async (data) =>{
         for (const item in data){
             formData.append(`${item}`,data[item])
         }
-        console.log(formData)
-        const response = await axios.post(`${serverUrl}/registration/`,formData)
+        for (let key of formData.keys()) {
+            console.log(`${key}: ${formData.get(key)}`);
+        }
+        //const response = await axios.post(`${serverUrl}/registration/`,formData) 
+        const response = await axios.post(`${serverUrl}/registration/`,data)
         const responseData = response.data
         return responseData
     }catch(error){
+        if(error.response.status == 422) return {code: 422, message: `Пароль или email не верны`,user:null}
         console.error('Error :', error)
         return {code: 500, message: `Ошибка: ${error}`,user:null}
     }

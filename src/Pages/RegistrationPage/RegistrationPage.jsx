@@ -15,7 +15,7 @@ const RegistrationPage:FC = () => {
   const [month,setmonth] = useState('')
   const [day,setday] = useState('')
 
-  const [avatarFile,setavatarFile] = useState(null)
+  const [avatar_file,setavatar_file] = useState(null)
   const InputFileRef = useRef(null)
 
   const [MessageError,setMessageError] = useState('')
@@ -31,9 +31,19 @@ const RegistrationPage:FC = () => {
     if(!(f_name && s_name && email && password)){
       setMessageError("Введи поля корректно!")
       return
+    }else if(password.length < 8 || password.length > 32){
+      setMessageError("Введи пароль от 8 до 32 символов!")
+      return
+    }else if(f_name.length < 2 || s_name.length < 2){
+      setMessageError("Ваше имя слишком мало!")
+      return
+    }
+    else if(f_name.length < 2 || s_name.length < 2){ // тут проверка на ДАТУ
+      setMessageError("Ваше имя слишком мало!")
+      return
     }
     try {
-      const user = {f_name,s_name,email,password,avatarFile} // Partial<IUser>
+      const user = {f_name,s_name,email,password,avatar_file} // Partial<IUser>
       const data = await registration(user)
       if(data.user){
         const id = data.user.id
@@ -54,7 +64,7 @@ const onClick_PickFile =()=>{
   InputFileRef.current.click()
 }
 const onChange_PickFile =e=>{
-  setavatarFile(e.target.files[0])
+  setavatar_file(e.target.files[0])
   setMessageError("Файл выбран")
 }
 return (

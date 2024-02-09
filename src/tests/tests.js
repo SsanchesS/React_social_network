@@ -6,7 +6,7 @@ export const authb =async()=>{
   console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! DATA:  ",data)
 }
 export const registrationb =async()=>{
-  const user = {password:"admin4",email:"admin4",f_name:"admin4",s_name:"admin4",avatar:"avatar"}
+  const user = {password:"admin4",email:"admin4",f_name:"admin4",s_name:"admin4",avatar_file:"avatar_file"}
   const data = await registration(user)
   console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! DATA:  ",data)
 }
@@ -16,7 +16,7 @@ export const get_userb =async()=>{
 }
 export const upd_userb =async()=>{
   const user = {f_name:"admin",mas_friends:[2,1,1]}
-  const full_user = {password:"admin",email:"admin",f_name:"admin",s_name:"admin",avatar:"adminava",mas_friends:[1,2,1],mas_chats:[6,2]}
+  const full_user = {password:"admin",email:"admin",f_name:"admin",s_name:"admin",avatar_file:"adminava",mas_friends:[1,2,1],mas_chats:[6,2]}
   const data = await upd_user(1,user)
   console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! DATA:  ",data)
 }
