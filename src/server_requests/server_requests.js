@@ -16,14 +16,6 @@ export const auth = async (data) =>{
 // export const registration = async (data:IUser):Promise<Iresponse> =>{
 export const registration = async (data) =>{
     try{
-        const formData = new FormData()
-        for (const item in data){
-            formData.append(`${item}`,data[item])
-        }
-        for (let key of formData.keys()) {
-            console.log(`${key}: ${formData.get(key)}`);
-        }
-        //const response = await axios.post(`${serverUrl}/registration/`,formData) 
         const response = await axios.post(`${serverUrl}/registration/`,data)
         const responseData = response.data
         return responseData

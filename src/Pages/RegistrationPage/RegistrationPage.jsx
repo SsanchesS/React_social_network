@@ -64,7 +64,10 @@ const onClick_PickFile =()=>{
   InputFileRef.current.click()
 }
 const onChange_PickFile =e=>{
-  setavatar_file(e.target.files[0])
+  const file = e.target.files[0]
+  const reader = new FileReader()
+  reader.onloadend=()=>setavatar_file(reader.result)
+  reader.readAsDataURL(file)
   setMessageError("Файл выбран")
 }
 return (
