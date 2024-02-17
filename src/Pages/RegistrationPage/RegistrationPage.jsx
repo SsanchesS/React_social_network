@@ -15,13 +15,13 @@ const RegistrationPage:FC = () => {
   const [month,setmonth] = useState('')
   const [day,setday] = useState('')
 
-  const [avatar_file,setavatar_file] = useState(null)
+  const [avatar_file,setavatar_file] = useState(null) // or str
   const InputFileRef = useRef(null)
 
   const [MessageError,setMessageError] = useState('')
 
   const onClick_registration = async()=>{
-    let birth : Ibirth = {year,month,day} ////////////////////////////// const
+    let birth = {year,month,day} ////////////////////////////// const
     // try:
       // datetime.strptime(birth, "%Y-%m-%d")
     // except ValueError:
@@ -65,9 +65,23 @@ const onClick_PickFile =()=>{
 }
 const onChange_PickFile =e=>{
   const file = e.target.files[0]
-  const reader = new FileReader()
-  reader.onloadend=()=>setavatar_file(reader.result)
-  reader.readAsDataURL(file)
+
+  if(!file){
+    setMessageError('Файл не выбран');
+    setavatar_file(null)
+    return
+  }
+
+  const maxSize = 2*(1024 * 1024); // 2MB
+  if (file.size > maxSize) {
+    setMessageError('Файл слишком большой. Максимальный размер файла - 2MB.');
+    setavatar_file(null)
+    return
+  }
+         
+  const reader = new FileReader()                           /////////////////////////////////////// МОЖНО вынести в отдельный сервис
+  reader.onloadend=()=>setavatar_file(reader.result)  
+  reader.readAsDataURL(file) // чтение в формате base64
   setMessageError("Файл выбран")
 }
 return (
@@ -86,7 +100,7 @@ return (
         <div className='mb10px'><input type="text" placeholder='Ваша фамилия' value={s_name} onChange={e=>set_s_name(e.target.value)}/></div>
         <div className={`mb10px ${s.inputFile} ${s.button} button`}>
           <button onClick={onClick_PickFile}>Файл на аву</button>
-          <input type="file" accept="image/*,.png,.jpg,.gif,.web" ref={InputFileRef} onChange={onChange_PickFile}/>
+          <input type="file" accept="image/*,.png,.jpg,.jpeg,.gif,.web" ref={InputFileRef} onChange={onChange_PickFile}/>
         </div>
 
         <p className='mb10px'>Дата рождения {`(Можешь не вводить, пока)`}</p>
@@ -102,7 +116,7 @@ return (
       </div>
       
       <div className={`${MessageError ? '' : 'hide'} red`}><p className='mb10px'>{MessageError}</p></div>
-      <div className={`${s.button} button`}><button onClick={onClick_registration}>Зарегестрироваться</button></div>
+      <div className={`${s.button} button`}><button onClick={onClick_registration}>Зарегистрироваться</button></div>
 
     </div>
 

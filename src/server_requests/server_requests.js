@@ -20,7 +20,7 @@ export const registration = async (data) =>{
         const responseData = response.data
         return responseData
     }catch(error){
-        if(error.response.status == 422) return {code: 422, message: `Пароль или email не верны`,user:null}
+        if(error.response.status === 422) return {code: 422, message: `Пароль или email не верны`,user:null}
         console.error('Error :', error)
         return {code: 500, message: `Ошибка: ${error}`,user:null}
     }
