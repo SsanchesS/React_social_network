@@ -6,7 +6,7 @@ import Sub from '../../../../UI/Sub/Sub'
 import Music from '../../../../UI/Music/Music'
 import Photo from '../../../../UI/Photo/Photo'
 
-const Body:FC = ({user}) => {
+const Body = ({user}) => { // :FC                      {/* Убать */}
 const [hidePhoto,sethidePhoto] = useState(false)
 const [hideMusic,sethideMusic] = useState(true)
 
@@ -57,7 +57,7 @@ return (
 
       <div className={`card ${s.createPost}`}>
 
-        <div className={s.img}><img src='/img/avatar.png' alt="avatar" /></div>                {/*user.avatarFile*/}
+        <div className={s.img}><img src={user.avatar_file} alt="avatar" /></div>                {/*user.avatar_file*/}
         <input type="text" placeholder='Что у вас нового?' value={textContent} onChange={e=>settextContent(e.target.value)}/>
 
         <div className={s.img}><img src='/img/photo.png' alt="photo" /></div>

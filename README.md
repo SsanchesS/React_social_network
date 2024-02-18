@@ -8,10 +8,6 @@
 
 - сделать ссылки на страницы как обьект (routing.js)
 
-- Сохранять файлы в папках, а не в базе
-
-- в базе тип nvarchar(max) для файлов                 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
 - Сделать в pydantic Array[int] вместо - mas_photosFiles: Optional[str] = None
 
 - "../user_files/usersFiles" - на сервере сделать отдельный обьекст с путями
@@ -28,8 +24,6 @@
 
 - опять забыл почему insert_values = [f"'{user.f_name}'",f"'{user.s_name}'",f"'{user.password}'",f"'{user.email}'"]
 
-- сделать avatar как file
-
 - Изменить base.txt
 
 - REDUX
@@ -45,6 +39,10 @@
 - Удалить лишние файлы, на сервере это login
 
 - Аннотации python
+
+- mas_messages Пересмотреть sql
+
+- добавить поля в types
 
 Чтобы развернуть проект: 
 

@@ -5,7 +5,7 @@ import {registration} from "../../server_requests/server_requests"
 
 import {IUser,Ibirth,Iresponse} from '../../types/types'
 
-const RegistrationPage:FC = () => {
+const RegistrationPage = () => {               // :FC
   const [f_name,set_f_name] = useState('')
   const [s_name,set_s_name] = useState('')
   const [email,setemail] = useState('')
@@ -19,6 +19,34 @@ const RegistrationPage:FC = () => {
   const InputFileRef = useRef(null)
 
   const [MessageError,setMessageError] = useState('')
+
+  //
+
+  const onClick_PickFile =()=>{
+    InputFileRef.current.click()
+  }
+
+  const onChange_PickFile =e=>{
+    const file = e.target.files[0]
+  
+    if(!file){
+      setMessageError('Файл не выбран');
+      setavatar_file(null)
+      return
+    }
+  
+    const maxSize = 2*(1024 * 1024); // 2MB
+    if (file.size > maxSize) {
+      setMessageError('Файл слишком большой. Максимальный размер файла - 2MB.');
+      setavatar_file(null)
+      return
+    }
+           
+    const reader = new FileReader()                           /////////////////////////////////////// МОЖНО вынести в отдельный сервис
+    reader.onloadend=()=>setavatar_file(reader.result)  
+    reader.readAsDataURL(file) // чтение в формате base64
+    setMessageError("Файл выбран")
+  }
 
   const onClick_registration = async()=>{
     let birth = {year,month,day} ////////////////////////////// const
@@ -59,30 +87,6 @@ const RegistrationPage:FC = () => {
       console.log(error)
       setMessageError(error)
     }
-}
-const onClick_PickFile =()=>{
-  InputFileRef.current.click()
-}
-const onChange_PickFile =e=>{
-  const file = e.target.files[0]
-
-  if(!file){
-    setMessageError('Файл не выбран');
-    setavatar_file(null)
-    return
-  }
-
-  const maxSize = 2*(1024 * 1024); // 2MB
-  if (file.size > maxSize) {
-    setMessageError('Файл слишком большой. Максимальный размер файла - 2MB.');
-    setavatar_file(null)
-    return
-  }
-         
-  const reader = new FileReader()                           /////////////////////////////////////// МОЖНО вынести в отдельный сервис
-  reader.onloadend=()=>setavatar_file(reader.result)  
-  reader.readAsDataURL(file) // чтение в формате base64
-  setMessageError("Файл выбран")
 }
 return (
   <>

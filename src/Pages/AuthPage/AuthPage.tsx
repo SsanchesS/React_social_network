@@ -10,8 +10,14 @@ const [password,setpassword] = useState('')
 const [MessageError,setMessageError] = useState('')
 
 const onClick_auth = async()=>{
-  try{                                   ///////////////// можно сделать читабельней
-    if (email && password){
+  if (!(email && password)){
+    setMessageError("Введи поля корректно!")
+    return
+  }else if(password.length < 8 || password.length > 32){
+    setMessageError("Введи пароль от 8 до 32 символов!")
+    return
+  }
+  try{
     const user = {password, email}
     const data = await auth(user)
     if(data.user){
@@ -23,9 +29,6 @@ const onClick_auth = async()=>{
     }else{
       setMessageError(data.message)
     }
-  }else{
-    setMessageError("Введи поля корректно!")
-  }
   }catch (error:any) {
       console.log(error)
       setMessageError(error)

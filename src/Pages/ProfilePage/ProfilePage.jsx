@@ -1,4 +1,4 @@
-import React,{useEffect} from 'react'
+import React,{useEffect,useState} from 'react'
 import {useParams} from "react-router-dom"
 
 import Header from '../../components/Header/Header'
@@ -14,7 +14,8 @@ const ProfilePage = () => {
   const goNotFoundPage = () => navigate( '/notFound', {replace:true} )  //////////// УБРАТЬ
 
   
-  const [user,setuser] = React.useState({})     /////////////// Получать через redux
+  const [user,setuser] = useState({})     /////////////// Получать через redux
+  const [MessageError,setMessageError] = useState('')
 
   const {id} = useParams()
   const f_get_user_for_useEffect =async(id)=>{
@@ -25,11 +26,12 @@ const ProfilePage = () => {
         setuser(data.user)
         // перенаправляем (куда?) и сохраняем id
       }else{
-        goNotFoundPage()  // ССылка на страницу 404
+        setMessageError(data.message)
+        // goNotFoundPage()  // ССылка на страницу 404
       }               
     }catch (error) { // :any
       console.log(error)
-      alert(error)
+      setMessageError(error)
     }
   }
 
@@ -39,11 +41,12 @@ const ProfilePage = () => {
 
   return (
   <>
-    <Header user={user}/>
+    <Header user={user}/>  {/* Убать */}
     <div className="center">
+    <div className={`${MessageError ? '' : 'hide'} red`}><p className='mb10px'>{MessageError}</p></div>
       <div className='flex'>
-        <SideBar user={user}/>
-        <ProfileMain user={user}/>
+        <SideBar/>
+        <ProfileMain user={user}/>  {/* Убать */}
       </div>
     </div>
   </>

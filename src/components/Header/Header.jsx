@@ -19,7 +19,7 @@ const Header = ({user}) => {
 
           <div className={s.right}>
               <div className={s.userName}><h3>{user.f_name} {user.s_name}</h3></div>
-              <div className={s.avatar}><a href="#"><img src={user.avatarFile} alt="avatar" /></a></div>
+              <div className={s.avatar}><a href="#"><img src={user.avatar_file} alt="avatar" /></a></div>
           </div>
 
         </div>
