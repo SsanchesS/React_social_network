@@ -10,7 +10,7 @@ export const auth = async (data) =>{
         return responseData 
     }catch(error){
         if(error.response.status === 422) return {code: 422, message: `Введи поля корректно!`,user:null} // что то с полями 
-        console.error('Error :', error)
+        console.error('Ошибка :', error)
         return {code: 500, message: `Ошибка: ${error}`,user:null}
     }
 }
@@ -22,7 +22,7 @@ export const registration = async (data) =>{
         return responseData
     }catch(error){
         if(error.response.status === 422) return {code: 422, message: `Введи поля корректно!`,user:null} // что то с полями 
-        console.error('Error :', error)
+        console.error('Ошибка :', error)
         return {code: 500, message: `Ошибка: ${error}`,user:null}
     }
 }
@@ -33,7 +33,7 @@ export const get_user = async (id) =>{
         const responseData = response.data
         return responseData
     }catch(error){
-        console.error('Error :', error)
+        console.error('Ошибка :', error)
         return {code: 500, message: `Ошибка: ${error}`,user:null}
     }
 }
@@ -48,7 +48,9 @@ export const upd_user = async (id,data)  =>{
         const responseData = response.data
         return responseData
     }catch(error){
-        console.error('Error :', error)
+        if(error.response.status === 422) return {code: 422, message: `Введи поля корректно!`,user:null} // что то с полями 
+        console.error('Ошибка :', error)
+        return {code: 500, message: `Ошибка: ${error}`,user:null}
     }
 }
 export const del_user = async (id)  =>{
@@ -57,7 +59,8 @@ export const del_user = async (id)  =>{
         const responseData = response.data
         return responseData
     }catch(error){
-        console.error('Error :', error)
+        console.error('Ошибка :', error)
+        return {code: 500, message: `Ошибка: ${error}`,user:null}
     }
 }
 ///////////////////////////////////////////////////////////////
@@ -67,8 +70,8 @@ export const get_chat = async (id)  =>{
         const responseData = response.data
         return responseData
     }catch(error){
-        console.error('Error :', error)
-        return {code: 500, message: `Ошибка: ${error}`,chat:null}
+        console.error('Ошибка :', error)
+        return {code: 500, message: `Ошибка: ${error}`,user:null}
     }
 }
 export const new_chat = async (data)  =>{
@@ -82,8 +85,8 @@ export const new_chat = async (data)  =>{
         const responseData = response.data
         return responseData
     }catch(error){
-        console.error('Error :', error)
-        return {code: 500, message: `Ошибка: ${error}`,chat:null}
+        console.error('Ошибка :', error)
+        return {code: 500, message: `Ошибка: ${error}`,user:null}
     }
 }
 export const upd_chat = async (id,data)  =>{
@@ -97,7 +100,9 @@ export const upd_chat = async (id,data)  =>{
         const responseData = response.data
         return responseData
     }catch(error){
-        console.error('Error :', error)
+        if(error.response.status === 422) return {code: 422, message: `Введи поля корректно!`,user:null} // что то с полями 
+        console.error('Ошибка :', error)
+        return {code: 500, message: `Ошибка: ${error}`,user:null}
     }
 }
 export const del_chat = async (id)  =>{
@@ -106,6 +111,7 @@ export const del_chat = async (id)  =>{
         const responseData = response.data
         return responseData
     }catch(error){
-        console.error('Error :', error)
+        console.error('Ошибка :', error)
+        return {code: 500, message: `Ошибка: ${error}`,user:null}
     }
 }

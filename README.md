@@ -1,5 +1,9 @@
 Таски:
 
+- env
+
+-RTK query ХОЧУ!
+
 - Header position fixed
 - Названия Messenger and Dialog не нравится      так же friend and friendSide maybe
 - больше типов больше typescript

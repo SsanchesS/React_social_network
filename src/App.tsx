@@ -1,7 +1,7 @@
 //Sanches Network/Exchange
 // && И || ИЛИ
 
-import { FC, useEffect,useState } from "react";
+import { FC } from "react";
 import {Routes,Route,Link} from 'react-router-dom'
 
 import ProfilePage from "./Pages/ProfilePage/ProfilePage";
