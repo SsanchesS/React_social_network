@@ -19,9 +19,9 @@ body {
   height: 100%;
   margin: 0 auto;
 }
-.button{
+/* .button{
 
-}
+} */
 .button button{
   color: white;
   cursor: pointer;
@@ -67,12 +67,22 @@ body {
 .wrap{
   flex-wrap: wrap;
 }
+.mt10px{
+  margin-top: 10px;
+}
 .mb10px{
   margin-bottom: 10px;
 }
 .mr10px{
   margin-right: 10px;
 }
+.vis_none{
+  visibility: hidden;
+  opacity: 0;
+}
 .red{
   color:red
+}
+.white{
+  color: white
 }

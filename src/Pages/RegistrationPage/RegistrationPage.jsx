@@ -1,13 +1,18 @@
-import React, { FC,useState,useRef } from 'react'
+import React, { FC,useState,useRef, useEffect } from 'react'
 import s from './RegistrationPage.module.sass'
+import { useDispatch, useSelector } from 'react-redux'
 
-import {registration} from "../../server_requests/server_requests"
-
-import {IUser,Ibirth,Iresponse} from '../../types/types'
+import {registration} from "../../store/reducers/GuestSlice"
 
 const RegistrationPage = () => {               // :FC
+  const dispatch = useDispatch()
+  const {user,isLoading,message} = useSelector(state=>state.GuestReducer)
+
+  // console.log(state)
+
   const [f_name,set_f_name] = useState('')
   const [s_name,set_s_name] = useState('')
+  const [city,setcity] = useState('')
   const [email,setemail] = useState('')
   const [password,setpassword] = useState('')
   
@@ -20,7 +25,7 @@ const RegistrationPage = () => {               // :FC
 
   const [MessageError,setMessageError] = useState('')
 
-  //
+  //  
 
   const onClick_PickFile =()=>{
     InputFileRef.current.click()
@@ -48,6 +53,23 @@ const RegistrationPage = () => {               // :FC
     setMessageError("Файл выбран")
   }
 
+  //
+
+  useEffect(()=>{
+    if(user){                      //
+      const id = user.id
+
+      setMessageError(message)
+      // перенаправляем и сохраняем id      
+    }
+    else{
+      setMessageError(message)
+    }
+    console.log("Данные: ",user,isLoading,message)
+  },[user,message])
+  
+  //
+
   const onClick_registration = async()=>{
     let birth = {year,month,day} ////////////////////////////// const
     // try:
@@ -59,6 +81,9 @@ const RegistrationPage = () => {               // :FC
     if(!(f_name && s_name && email && password)){
       setMessageError("Введи поля корректно!")
       return
+    }else if(email.length < 5){
+      setMessageError("Введи верный email !")
+      return
     }else if(password.length < 8 || password.length > 32){
       setMessageError("Введи пароль от 8 до 32 символов!")
       return
@@ -67,26 +92,12 @@ const RegistrationPage = () => {               // :FC
       return
     }
     else if(f_name.length < 2 || s_name.length < 2){ // тут проверка на ДАТУ
-      setMessageError("Ваше имя слишком мало!")
+      setMessageError("Ваше")
       return
     }
-    try {
-      const user = {f_name,s_name,email,password,avatar_file} // Partial<IUser>
-      const data = await registration(user)
-      if(data.user){
-        const id = data.user.id
-
-        setMessageError(data.message)
-        console.log(data)                   ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        // перенаправляем и сохраняем id      
-      }
-      else{
-        setMessageError(data.message)
-      }
-    } catch (error) { // :any
-      console.log(error)
-      setMessageError(error)
-    }
+    const user_data = {f_name,s_name,email,password,avatar_file} // Partial<IUser>
+    dispatch(registration(user_data))
+    // пришлось логику перенести в useEffect ибо dispatch не асинхронный :(
 }
 return (
   <>
@@ -98,6 +109,8 @@ return (
         <h1><div className={s.logo}><a href="#"><img src="/img/logo.png" alt="logo" /></a></div>Впервые в SaNeX?</h1>
         <p>Моментальная регистрация</p>
       </div>
+
+      <h2 className={ `${s.text} white ${isLoading ? "" : "vis_none"}` }>Загрузка...</h2>
 
       <div className={s.inputs}>
         <div className='mb10px'><input type="text" placeholder='Ваше имя' value={f_name} onChange={e=>set_f_name(e.target.value)}/></div>
@@ -119,9 +132,9 @@ return (
         <div className='mb10px'><input type="password" placeholder='password' value={password} onChange={e=>setpassword(e.target.value)}/></div>
       </div>
       
-      <div className={`${MessageError ? '' : 'hide'} red`}><p className='mb10px'>{MessageError}</p></div>
-      <div className={`${s.button} button`}><button onClick={onClick_registration}>Зарегистрироваться</button></div>
-
+      <div className={`${s.button} button`}><button onClick={onClick_registration} disabled={isLoading}>Зарегистрироваться</button></div>
+      
+      <div className={`${MessageError ? '' : 'vis_none'} red`}><p className='mt10px'>{MessageError}</p></div>
     </div>
 
   </div>

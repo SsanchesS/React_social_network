@@ -22,6 +22,25 @@ export interface IUser{
     mas_friends: Array<number>
     mas_chats: Array<number>
 }
+export interface IGuest{
+    id:number
+    f_name: string
+    s_name: string
+    city: string
+    // birth : Date // date(1990, 1, 1),
+
+    avatar_file: string // file
+    mas_photosFiles: Array<number> 
+    mas_music : Array<number>
+
+    Posts : Array<IPost> ///////////////////////
+
+    password: string  // не обязательно?
+    email: string
+    
+    mas_friends: Array<number>
+    mas_chats: Array<number>
+}
 //
 export interface IPost{
     id:number

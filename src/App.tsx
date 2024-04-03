@@ -2,7 +2,7 @@
 // && И || ИЛИ
 
 import { FC } from "react";
-import {Routes,Route,Link} from 'react-router-dom'
+import {Routes,Route} from 'react-router-dom'
 
 import ProfilePage from "./Pages/ProfilePage/ProfilePage";
 import MessengerPage from "./Pages/MessengerPage/MessengerPage";
