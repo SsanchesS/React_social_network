@@ -1,7 +1,9 @@
 import { IUser, Iresponse } from "../../types/types";
 import { api } from "./api";
 
-interface IRegistrationData extends Partial<Pick<IUser,"f_name"|"s_name"|"email"|"password"|"avatar_file">>{}
+interface IRegistrationData extends Pick<IUser,"f_name"|"s_name"|"email"|"password"|"avatar_file">{}
+
+interface IAuthData extends Pick<IUser,"email"|"password">{}
 
 export const guestApi = api.injectEndpoints({
    endpoints: build =>({
@@ -11,8 +13,19 @@ export const guestApi = api.injectEndpoints({
             method: "POST",
             body: RegistrationData
          }),
-         // invalidatesTags: ["User"]
+         invalidatesTags: ["User"]
       }),
-
+      auth: build.mutation<Iresponse,IAuthData>({
+         query:(AuthData:IAuthData)=>({
+            url:"/auth",
+            method: "POST",
+            body: AuthData
+         }),
+         invalidatesTags: ["User"]
+      }),
+      getUser: build.query<Iresponse,number>({
+         query:(id:number)=>({url: `/user/${id}`}),
+         providesTags: result => ["Guest"]
+      })
    })
 })

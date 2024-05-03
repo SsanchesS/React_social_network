@@ -11,16 +11,16 @@ export interface IUser{
     // birth : Date // date(1990, 1, 1),
 
     avatar_file: string // file
-    mas_photosFiles: Array<number> 
-    mas_music : Array<number>
+    mas_photosFiles?: Array<number> 
+    mas_music?: Array<number>
 
-    Posts : Array<IPost> ///////////////////////
+    Posts?: Array<IPost> ///////////////////////
 
-    password: string  // не обязательно?
+    password?: string  // не обязательно?
     email: string
     
-    mas_friends: Array<number>
-    mas_chats: Array<number>
+    mas_friends?: Array<number>
+    mas_chats?: Array<number>
 }
 export interface IGuest{
     id:number
@@ -30,12 +30,12 @@ export interface IGuest{
     // birth : Date // date(1990, 1, 1),
 
     avatar_file: string // file
-    mas_photosFiles: Array<number> 
-    mas_music : Array<number>
+    mas_photosFiles?: Array<number> 
+    mas_music?: Array<number>
 
-    Posts : Array<IPost> ///////////////////////
+    Posts?: Array<IPost> ///////////////////////
     
-    mas_friends: Array<number>
+    mas_friends?: Array<number>
 }
 //
 export interface IPost{

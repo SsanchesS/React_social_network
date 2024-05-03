@@ -1,8 +1,9 @@
-import React, { FC,useState,useRef, useEffect } from 'react'
+import React, { FC,useState,useRef } from 'react'
 import s from './RegistrationPage.module.sass'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 
 import {guestApi} from "../../store/api/guest.api"
+import {setUser} from "../../store/reducers/UserSlice"
 
 const RegistrationPage = () => {               // :FC
   const dispatch = useDispatch()
@@ -82,7 +83,7 @@ const RegistrationPage = () => {               // :FC
     const registration_data = {f_name,s_name,email,password,avatar_file} // Partial<IUser>
 
     try {
-      await registration(registration_data).then(onfulfilled=>{ // data or error
+      await registration(registration_data).then(onfulfilled=>{ // data or error                                     ////////////////////////////////////// ПОПРОБОВАТЬ БЕЗ then //////////////////////////////////////
         if(onfulfilled.error){
           setMessageError(`${onfulfilled.error.status}: ${onfulfilled.error.data.detail[0].type}: ${onfulfilled.error.data.detail[0].msg}`)
           return
@@ -92,8 +93,9 @@ const RegistrationPage = () => {               // :FC
         }
         const id = onfulfilled.data.user.id
         setMessageError(onfulfilled.data.message)
-        // перенаправляем и сохраняем id      
-        console.log(onfulfilled.data)
+
+        dispatch(setUser(onfulfilled.data.user))
+        // перенаправляем и сохраняем id 
       })
     } catch (error) {
       setMessageError("Ошибка")

@@ -1,8 +1,5 @@
-import { createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { IUser } from "../../types/types";
-
-const serverUrl  = "http://127.0.0.1:8000"     ///////////////////////////
 
 const initialState:IUser = {
    id:0,
@@ -29,7 +26,10 @@ const UserSlice = createSlice({
    name:"UserSlice",
    initialState,
    reducers:{
-      
+      setUser:(state,action: PayloadAction<IUser>)=>{
+         return action.payload
+      }
    }
 })
 export default UserSlice.reducer
+export const {setUser} = UserSlice.actions

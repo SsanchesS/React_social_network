@@ -2,7 +2,7 @@ import React from 'react'
 import s from "./ProfileMain.module.sass"
 import Body from './Body/Body'
 
-const ProfileMain = ({user}) => {  //  {/* Убать */}
+const ProfileMain = () => {  //  {/* Убать */}
 return (
 <div className={s.ProfileMain}>
   <div className={s.center}>
@@ -11,13 +11,13 @@ return (
       <div className={s.profile}>
         <div className={s.about}>
           <div className={s.avatar}>
-            <div className={s.img}><img src={user.avatar_file} alt="avatar" /></div>
+            <div className={s.img}><img src={""} alt="avatar" /></div> {/* ВТСАИВТЬ */}
           </div>
           <div className={s.text}>
-            <h2 className={s.name}>{user.f_name} {user.s_name}</h2>
+            <h2 className={s.name}>{} {}</h2>                   {/* ВТСАИВТЬ */}
             <div className={s.aboutMore}>
               <ul className='flex'>
-                <li className='Lright'><a href="#">{user.city}</a></li>
+                <li className='Lright'><a href="#">{}</a></li>    {/* ВТСАИВТЬ */}
                 <li><a href="#">Подробнее</a></li>                        {/* button */}
               </ul>
             </div>
@@ -31,7 +31,7 @@ return (
       </div>
     </div>
     
-    <Body user={user}/>
+    <Body/>
   </div>
 </div>
 )
