@@ -34,12 +34,8 @@ export interface IGuest{
     mas_music : Array<number>
 
     Posts : Array<IPost> ///////////////////////
-
-    password: string  // не обязательно?
-    email: string
     
     mas_friends: Array<number>
-    mas_chats: Array<number>
 }
 //
 export interface IPost{

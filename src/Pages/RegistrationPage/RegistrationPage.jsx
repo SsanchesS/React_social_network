@@ -2,13 +2,10 @@ import React, { FC,useState,useRef, useEffect } from 'react'
 import s from './RegistrationPage.module.sass'
 import { useDispatch, useSelector } from 'react-redux'
 
-import {registration} from "../../store/reducers/GuestSlice"
+import {guestApi} from "../../store/api/guest.api"
 
 const RegistrationPage = () => {               // :FC
   const dispatch = useDispatch()
-  const {user,isLoading,message} = useSelector(state=>state.GuestReducer)
-
-  // console.log(state)
 
   const [f_name,set_f_name] = useState('')
   const [s_name,set_s_name] = useState('')
@@ -25,7 +22,9 @@ const RegistrationPage = () => {               // :FC
 
   const [MessageError,setMessageError] = useState('')
 
-  //  
+  // 
+  const [registration,{data,isLoading,error}] = guestApi.useRegistrationMutation()
+  //
 
   const onClick_PickFile =()=>{
     InputFileRef.current.click()
@@ -55,21 +54,6 @@ const RegistrationPage = () => {               // :FC
 
   //
 
-  useEffect(()=>{
-    if(user){                      //
-      const id = user.id
-
-      setMessageError(message)
-      // перенаправляем и сохраняем id      
-    }
-    else{
-      setMessageError(message)
-    }
-    console.log("Данные: ",user,isLoading,message)
-  },[user,message])
-  
-  //
-
   const onClick_registration = async()=>{
     let birth = {year,month,day} ////////////////////////////// const
     // try:
@@ -95,9 +79,26 @@ const RegistrationPage = () => {               // :FC
       setMessageError("Ваше")
       return
     }
-    const user_data = {f_name,s_name,email,password,avatar_file} // Partial<IUser>
-    dispatch(registration(user_data))
-    // пришлось логику перенести в useEffect ибо dispatch не асинхронный :(
+    const registration_data = {f_name,s_name,email,password,avatar_file} // Partial<IUser>
+
+    try {
+      await registration(registration_data).then(onfulfilled=>{ // data or error
+        if(onfulfilled.error){
+          setMessageError(`${onfulfilled.error.status}: ${onfulfilled.error.data.detail[0].type}: ${onfulfilled.error.data.detail[0].msg}`)
+          return
+        }else if(onfulfilled.data.code >= 400){
+          setMessageError(`${onfulfilled.data.code}: ${onfulfilled.data.message}`)
+          return
+        }
+        const id = onfulfilled.data.user.id
+        setMessageError(onfulfilled.data.message)
+        // перенаправляем и сохраняем id      
+        console.log(onfulfilled.data)
+      })
+    } catch (error) {
+      setMessageError("Ошибка")
+      console.log(error)
+    }
 }
 return (
   <>
