@@ -23,8 +23,8 @@ export const guestApi = api.injectEndpoints({
          }),
          invalidatesTags: ["User"]
       }),
-      getUser: build.query<Iresponse,number>({
-         query:(id:number)=>({url: `/user/${id}`}),
+      getGuest: build.query<Iresponse,number>({
+         query:(id:number)=>({url: `/users/${id}`}),
          providesTags: result => ["Guest"]
       })
    })

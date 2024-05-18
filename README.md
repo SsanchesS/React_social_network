@@ -1,5 +1,10 @@
 Таски:
 
+- "@types/react-redux": "^7.1.33",
+    "@types/react-router-dom": "^5.3.3",
+
+- Где useAppDispatch и почему AuthPage старой версии?
+
 - env
 
 - Header position fixed

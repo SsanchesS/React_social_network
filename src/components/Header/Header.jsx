@@ -1,7 +1,7 @@
 import React from 'react'
 import s from "./Header.module.sass"
 
-const Header = () => {
+const Header = ({user}) => {
   return (                                      // position поменять
     <div className={s.header}>       
 
@@ -16,14 +16,13 @@ const Header = () => {
               <div className={s.notification}><a href="#"><img src="/img/notification.png" alt="notification" /></a></div>           {/* button */}
               <div className={s.music}><a href="#"><img src="/img/music.png" alt="music" /></a></div>                             {/* button */}
           </div>
-
+          {
+          user?.id && 
           <div className={s.right}>
-              {/* <div className={s.userName}><h3>{user.f_name} {user.s_name}</h3></div>
-              <div className={s.avatar}><a href="#"><img src={user.avatar_file} alt="avatar" /></a></div> */}
-              <div className={s.userName}><h3> Sasa </h3></div>
-              <div className={s.avatar}><a href="#"><img src="" alt="avatar" /></a></div>
+              <div className={s.userName}><h3>{user.f_name} {user.s_name}</h3></div>
+              <div className={s.avatar}><a href="#"><img src={user.avatar_file} alt="avatar"/></a></div>
           </div>
-
+          }
         </div>
 
       </div>

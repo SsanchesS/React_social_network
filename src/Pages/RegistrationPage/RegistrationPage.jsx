@@ -4,9 +4,11 @@ import { useDispatch } from 'react-redux'
 
 import {guestApi} from "../../store/api/guest.api"
 import {setUser} from "../../store/reducers/UserSlice"
+import { Link,useNavigate } from 'react-router-dom'
 
 const RegistrationPage = () => {               // :FC
-  const dispatch = useDispatch()
+  const dispatch = useDispatch() // Где useAppDispatch
+  const navigate = useNavigate()
 
   const [f_name,set_f_name] = useState('')
   const [s_name,set_s_name] = useState('')
@@ -95,11 +97,11 @@ const RegistrationPage = () => {               // :FC
         setMessageError(onfulfilled.data.message)
 
         dispatch(setUser(onfulfilled.data.user))
-        // перенаправляем и сохраняем id 
+        navigate(`/profile/${id}`,{replace:true})
       })
-    } catch (error) {
-      setMessageError("Ошибка")
-      console.log(error)
+    } catch (error) { //:any
+        setMessageError("Ошибка")
+        console.log(error)
     }
 }
 return (
@@ -108,9 +110,19 @@ return (
 
     <div className={s.RegistrationPage}>
 
-      <div className={s.text}>
-        <h1><div className={s.logo}><a href="#"><img src="/img/logo.png" alt="logo" /></a></div>Впервые в SaNeX?</h1>
-        <p>Моментальная регистрация</p>
+      <div className={s.header}>
+        <div className={s.logo}>
+          <a href="#"><img src="/img/logo.png" alt="logo" /></a>          
+        </div>
+        <div className={s.text}>
+          <div className="flex">
+            <h1>Впервые в</h1>
+            <h1 className="flex"><div className={"w_y"}>S</div><div className={"b_y"}>a</div><div className={"w_y"}>N</div><div className={"b_y"}>e</div><div className={"w_y"}>X</div></h1> 
+          </div>
+          <p className={`${s.slogan}`}>Sanches Network/Exchange</p>
+          <p>Моментальная регистрация</p>
+        </div>
+        <div className={`button`}><Link to={"/auth"}><button>Войти</button></Link></div>               
       </div>
 
       <h2 className={ `${s.text} white ${isLoading ? "" : "vis_none"}` }>Загрузка...</h2>
@@ -118,7 +130,7 @@ return (
       <div className={s.inputs}>
         <div className='mb10px'><input type="text" placeholder='Ваше имя' value={f_name} onChange={e=>set_f_name(e.target.value)}/></div>
         <div className='mb10px'><input type="text" placeholder='Ваша фамилия' value={s_name} onChange={e=>set_s_name(e.target.value)}/></div>
-        <div className={`mb10px ${s.inputFile} ${s.button} button`}>
+        <div className={`mb10px ${s.inputFile} button`}>
           <button onClick={onClick_PickFile}>Файл на аву</button>
           <input type="file" accept="image/*,.png,.jpg,.jpeg,.gif,.web" ref={InputFileRef} onChange={onChange_PickFile}/>
         </div>
@@ -135,9 +147,9 @@ return (
         <div className='mb10px'><input type="password" placeholder='password' value={password} onChange={e=>setpassword(e.target.value)}/></div>
       </div>
       
-      <div className={`${s.button} button`}><button onClick={onClick_registration} disabled={isLoading}>Зарегистрироваться</button></div>
+      <div className={`button`}><button onClick={onClick_registration} disabled={isLoading}>Зарегистрироваться</button></div>
       
-      <div className={`${MessageError ? '' : 'vis_none'} red`}><p className='mt10px'>{MessageError}</p></div>
+      <div className={`${MessageError ? '' : 'vis_none'} red`}><p className={`mt10px ${s.MessageError}`}>{MessageError}</p></div>
     </div>
 
   </div>

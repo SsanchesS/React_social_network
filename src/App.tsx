@@ -15,7 +15,6 @@ import NotFoundPage from "./Pages/NotFoundPage/NotFoundPage";
 
 const App:FC=()=> {
   const user = useAppSelector(state=>state.UserReducer)
-  console.log(user)                                         ///////////////////////////////
 return (
   <div className="App">         {/* 141414 */}
   { user.id ?
@@ -36,18 +35,6 @@ return (
     </Routes>
   }
 
-{/* {
-  user.id ?
-<>
-<ProfilePage/>
-<MessengerPage/>
-<DialogPage/></> :
-<>
-<RegistrationPage/>
-<AuthPage/>
-<NotFoundPage/></>
-} */}
-
 {/* <ProfilePage/>
 <MessengerPage/>
 <DialogPage/>
@@ -55,7 +42,5 @@ return (
 <AuthPage/>
 <NotFoundPage/> */}
   </div>
-  );
-}
-
+);}
 export default App;

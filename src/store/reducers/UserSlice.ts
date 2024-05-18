@@ -27,6 +27,8 @@ const UserSlice = createSlice({
    initialState,
    reducers:{
       setUser:(state,action: PayloadAction<IUser>)=>{
+         // сохраняем после перезагрузки
+         
          return action.payload
       }
    }
