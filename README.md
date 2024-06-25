@@ -1,5 +1,12 @@
 Таски:
 
+- С null легче работать
+- sneakers_basket: ISneaker[] | null  
+
+- encoding='utf-8' на сервере
+
+- попробуй уменьшить запись - ../../../../public/img/bgProfile.jpg 
+
 - "@types/react-redux": "^7.1.33",
     "@types/react-router-dom": "^5.3.3",
 
